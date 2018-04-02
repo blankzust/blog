@@ -1,0 +1,66 @@
+{
+    "articles": [
+        {
+            "route": "/articles",
+            "title": "文章首页",
+            "icon": ""
+        },
+        {
+            "title": "Javascript",
+            "route": "/articles/JsArticles",
+            "children": [
+                {
+                    "route": "/articles/JsArticles/1",
+                    "title": "js简介"
+                },
+                {
+                    "route": "/articles/JsArticles/2"
+                }
+            ]
+        },
+        {
+            "title": "less",
+            "route": "/articles/lessArticles",
+            "children": [
+                {
+                    "route": "/articles/lessArticles/1",
+                    "title": "node环境引入less"
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "route": "/components",
+            "title": "组件首页"
+        },
+        {
+            "route": "/components/markDownEditorDemo",
+            "title": "React实用组件",
+            "children": [
+                {
+                    "route": "/components/markDownEditorDemo",
+                    "title": "markdown编辑器"
+                },
+                {
+                    "route": "/components/demo",
+                    "title": "组件示例"
+                }
+            ]
+        },
+        {
+            "route": "/demo",
+            "title": "demo",
+            "children": [
+              {
+                "route": "/components/demo/bigDataTableDemo",
+                "title": "大数据列表"
+              },
+              {
+                "route": "/components/demo/mockJsDemo",
+                "title": "mockJS应用"
+              }
+            ]
+        }
+    ]
+}

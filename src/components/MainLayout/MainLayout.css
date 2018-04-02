@@ -1,0 +1,33 @@
+.normal {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.layout {
+    overflow: visible
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+}
+
+.main {
+    padding: 0 8px;
+    flex: 1 0 auto
+}
+
+.footer {
+    text-align: center
+}
+
+.card {
+    height: 100%
+}
+
+.slide {
+    overflow: visible
+}
