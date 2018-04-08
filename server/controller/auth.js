@@ -24,7 +24,8 @@ exports.login = function ({req, res, db, userTokenMap, redisClient}) {
     if(result.length > 0) {
       if(verify(password, result[0].password)) {
         var token = getUUID(10);
-        redisClient.set(token, JSON.stringify({...result[0], password: undefined}))
+        result[0].password = undefined;
+        redisClient.set(token, JSON.stringify(result[0]))
         res.cookie('token', token);
         res.json({ result: true, message: '登录成功' });
         res.end();
@@ -43,9 +44,19 @@ exports.login = function ({req, res, db, userTokenMap, redisClient}) {
   // 5.token对应用户信息写入缓存
 }
 
-exports.logout = function({ req, res }) {
-  console.log(req.cookies);
-  res.end("");
+exports.logout = function({ req, res, redisClient }) {
+
+  var token = req.cookies && req.cookies.token;
+
+  if(token) {
+    res.clearCookie('token')
+    redisClient.del(token, function(err, numRemoved) {
+      res.json({ result: true, message: '成功退出登录' })
+    })
+  } else {
+    res.json({ result: false, message: '当前未登录' })
+    res.end();
+  }
   // 退出登录
   // 1.获取cookie中的用户token
   // 2.清除token在缓存中对应的用户信息
@@ -64,7 +75,6 @@ exports.getClientRsaPublicKey = function({ req, res }) {
 }
 
 exports.currentUser = function({ req, res, redisClient }) {
-  console.log(req.cookies, 'cookies');
   var token = req.cookies && req.cookies.token;
   if(token) {
     redisClient.get(token, function(err, dataRes) {
@@ -76,7 +86,6 @@ exports.currentUser = function({ req, res, redisClient }) {
         res.json({ result: true, data });
         res.end();
       }
-
     })
   } else {
     res.json({ result: false, message: 'token不得为空' })

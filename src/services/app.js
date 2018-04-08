@@ -11,3 +11,9 @@ export async function login({ username, password }) {
     body: JSON.stringify({ username, password })
   })
 }
+
+export async function logout() {
+  return request('/api/auth/logout', {
+    method: 'get'
+  })
+}

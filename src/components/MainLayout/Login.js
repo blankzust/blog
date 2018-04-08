@@ -1,5 +1,6 @@
 import { connect } from 'dva'
 import { Icon, Modal, Input, Form, message, Dropdown } from 'antd'
+import Setting from './Setting'
 import  styles from './index.less'
 
 const DropdownBtn = Dropdown.Button;
@@ -14,6 +15,7 @@ function Login({ currentUser, loginModal, dispatch, form }) {
     })
   }
   const closeLoginModal =  () => {
+    form.resetFields();
     dispatch({
       type: 'loginModal/toggleVisible',
       payload: {
@@ -30,11 +32,12 @@ function Login({ currentUser, loginModal, dispatch, form }) {
         password: formData.password,
         callback: (res) => {
           if(res.result) {
-            message.success(res.message)
+            form.resetFields();
             dispatch({
               type: 'app/getCurrentUser'
             })
             closeLoginModal();
+            message.success("成功登录");
           } else {
             message.error(res.message);
           }
@@ -43,16 +46,11 @@ function Login({ currentUser, loginModal, dispatch, form }) {
     })
   }
 
-  console.log(currentUser, 'currentUser');
   return (
     <div className={styles.loginIcon}>
       {
         currentUser?
-        <div>
-          <DropdownBtn>
-            { currentUser.name || '不明' }
-          </DropdownBtn>
-        </div>
+        <Setting dispatch={dispatch}/>
         :
         <Icon style={{ cursor: 'point' }} type="user" onClick={ openLoginModal }/>
       }

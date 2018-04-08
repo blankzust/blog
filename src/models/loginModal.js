@@ -16,12 +16,8 @@ export default {
     effects: {
       *login({ payload: { username, password, callback } }, { call, put }) {  // eslint-disable-line
         const rsaRes = yield getRsaPublicKey();
-        console.log(username, password);
-        console.log(rsaRes)
         if(rsaRes.result) {
-          console.log("dss");
           const entryptedPwd = entrypt(password, rsaRes.data);
-          console.log(entryptedPwd);
           const loginRes = yield login({ username, password: entryptedPwd });
           callback && callback(loginRes.data)
         } else {
