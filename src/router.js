@@ -16,7 +16,10 @@ import MockJsDemo from './routes/ComponentPages/mockDemo'
 function RouterConfig({ history }) {
   return (
     <Router path="/" history={history} component={Introduction}>
-      <IndexRoute component={Introduction} />
+      <Route path="/">
+        <IndexRoute component={Introduction} />
+      </Route>
+
       <Route path="users" component={Users} />
       <Route path="introduction" component={Introduction} />
       <Route path="articles">
