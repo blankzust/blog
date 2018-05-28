@@ -57,6 +57,10 @@
                 "title": "大数据列表"
               },
               {
+                "route": "/components/demo/betterTableDemo",
+                "title": "优化后的大数据列表"
+              },
+              {
                 "route": "/components/demo/mockJsDemo",
                 "title": "mockJS应用"
               }

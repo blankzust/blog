@@ -1,11 +1,12 @@
 import { connect } from 'dva'
 import { Icon, Modal, Input, Form, message, Dropdown } from 'antd'
 import Setting from './Setting'
+import PersonalModal from './PersonalModal'
 import  styles from './index.less'
 
 const DropdownBtn = Dropdown.Button;
 
-function Login({ currentUser, loginModal, dispatch, form }) {
+function Login({ currentUser, loginModal, personalModal, dispatch, form }) {
   const openLoginModal =  () => {
     dispatch({
       type: 'loginModal/toggleVisible',
@@ -82,6 +83,7 @@ function Login({ currentUser, loginModal, dispatch, form }) {
           </Form.Item>
         </Form>
       </Modal>
+      <PersonalModal visible={ personalModal.visible } currentUser={currentUser} dispatch={dispatch} />
     </div>
   )
 }
@@ -90,5 +92,6 @@ export default Form.create()(connect((state) => {
   return {
     currentUser: state.app.currentUser,
     loginModal: state.loginModal,
+    personalModal: state.personalModal
   }
 })(Login))

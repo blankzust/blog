@@ -49,11 +49,12 @@ app.engine('css', require('ejs').renderFile);
 
 
 // 路由
-app.post('/api/auth/login', (req, res) => require('./controller/auth.js').login({ req, res, db, redisClient }));
-app.get('/api/auth/logout', (req, res) => require('./controller/auth.js').logout({ req, res, db, redisClient }));
-app.get('/api/common/getRsaPublicKey', function (req, res) { require('./controller/auth.js').getClientRsaPublicKey({ req, res, db }) })
-app.get('/api/auth/getCurrentUser', (req, res) => require('./controller/auth.js').currentUser({ req, res, db, redisClient }));
-
+var authController = require('./controller/auth.js')
+app.post('/api/auth/login', (req, res) => authController.login({ req, res, db, redisClient }));
+app.get('/api/auth/logout', (req, res) => authController.logout({ req, res, db, redisClient }));
+app.get('/api/common/getRsaPublicKey', function (req, res) { authController.getClientRsaPublicKey({ req, res, db }) })
+app.get('/api/auth/getCurrentUser', (req, res) => authController.currentUser({ req, res, db, redisClient }));
+app.post('/api/auth/setPersonal', (req, res) => authController.setPersonal({ req, res, db, redisClient }))
 
 // 页面路由
 app.get('/view/:name', (req, res) => {

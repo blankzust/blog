@@ -20,9 +20,8 @@
   },
   "proxy": {
     "/api": {
-      "target": "http://jsonplaceholder.typicode.com/",
-      "changeOrigin": true,
-      "pathRewrite": { "^/api" : "" }
+      "target": "http://127.0.0.1:8082",
+      "changeOrigin": true
     }
   }
 }

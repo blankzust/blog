@@ -12,6 +12,7 @@ import ComponentPages from "./routes/ComponentPages/";
 import DemoComponent from './routes/ComponentPages/DemoComponent'
 import bigDataTableDemo from './routes/ComponentPages/bigDataTable'
 import MockJsDemo from './routes/ComponentPages/mockDemo'
+import BetterTableDemo from './routes/ComponentPages/betterBigDataTable'
 
 function RouterConfig({ history }) {
   return (
@@ -31,8 +32,8 @@ function RouterConfig({ history }) {
           {/*<Route path="" component={ComponentPages} />*/}
           <Route path="bigDataTableDemo" component={ bigDataTableDemo } />
           <Route path="mockJsDemo" component={ MockJsDemo } />
+          <Route path="betterTableDemo" component={BetterTableDemo}/>
         </Route>
-
       </Route>
     </Router>
   );

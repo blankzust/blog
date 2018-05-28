@@ -4,18 +4,28 @@ function Setting({ dispatch, currentUser }) {
   const menu = (
     <Menu
       onClick={({ key }) => {
-        dispatch({
-          type: 'app/' + key,
-          payload: {
-            callback: (res) => {
-              if(res.result) {
-                message.success("成功退出登录");
-              } else {
-                message.error(res.message);
+        if(key == 'personal') {
+          dispatch({
+            type: 'personalModal/toggleVisible',
+            payload: {
+              visible: true
+            }
+          })
+        } else {
+          dispatch({
+            type: 'app/' + key,
+            payload: {
+              callback: (res) => {
+                if(res.result) {
+                  message.success("成功退出登录");
+                } else {
+                  message.error(res.message);
+                }
               }
             }
-          }
-        })
+          })
+        }
+
       }}
     >
       <Menu.Item key="personal">修改个人信息</Menu.Item>

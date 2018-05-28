@@ -4,7 +4,6 @@ import { connect } from 'dva'
 
 
 function Users({ dispatch, list, page = 1, total, loading }) {
-  console.log(page, total);
   const columns = [
     {
       title: "Name",
@@ -33,17 +32,17 @@ function Users({ dispatch, list, page = 1, total, loading }) {
             <a>删除</a>
           </span>
         )
-        
+
       }
     }
   ]
 
   return (
     <div className={ styles.normal }>
-      <Table 
-        rowKey="id" 
-        columns={ columns } 
-        dataSource={ list } 
+      <Table
+        rowKey="id"
+        columns={ columns }
+        dataSource={ list }
         pagination={{ current: page, total: total, pageSize: 5 }}
         loading={ loading }
         onChange={(pagination, filters, sorter) => {

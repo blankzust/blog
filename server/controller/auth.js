@@ -52,6 +52,7 @@ exports.logout = function({ req, res, redisClient }) {
     res.clearCookie('token')
     redisClient.del(token, function(err, numRemoved) {
       res.json({ result: true, message: '成功退出登录' })
+      res.end();
     })
   } else {
     res.json({ result: false, message: '当前未登录' })
@@ -92,4 +93,23 @@ exports.currentUser = function({ req, res, redisClient }) {
     res.end();
   }
 
+}
+
+exports.setPersonal = function({ req, res, redisClient, db }) {
+  var token = req.cookies && req.cookies.token;
+  var newUserInfo = req.body;
+  var allowChangeProperties = ['name', 'sex'];
+  if(token) {
+    redisClient.get(token, function(err, dataRes) {
+      if(dataRes) {
+        var oldUserInfo = JSON.parse(dataRes.toString())
+        var trueNewUserInfo = {};
+        allowChangeProperties.forEach(function(key) {
+          trueNewUserInfo[key] = newUserInfo[key] || oldUserInfo[key]
+        })
+
+        db.collection('sys_user').update({ id: oldUserInfo.id }, trueNewUserInfo)
+      }
+    })
+  }
 }

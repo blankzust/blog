@@ -30,7 +30,7 @@ export default {
     reducers: {
       toggleVisible(state, { payload: { visible, isReRender } }) {
         return returnByIsReRender(state, { visible }, isReRender);
-      },
+      }
     },
 
   };

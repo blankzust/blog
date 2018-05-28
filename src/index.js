@@ -4,6 +4,7 @@ import Mock from 'mockjs'
 import './index.css';
 import { mockStart } from './mock/index'
 import { api } from './config/constants'
+import { fpsMeter } from './utils/index'
 
 // 1. Initialize
 const app = dva({
@@ -22,6 +23,8 @@ app.model(require("./models/app"))
 
 app.model(require("./models/loginModal"))
 
+app.model(require("./models/personalModal"))
+
 // 2. Plugins
 // app.use({});
 
@@ -33,6 +36,8 @@ app.router(require('./router'));
 
 // 5. Start
 app.start('#root');
+
+fpsMeter()
 
 mockStart(api);
 

@@ -4,13 +4,15 @@
     "start": "roadhog server",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "server": "sudo mongod --config /usr/local/Cellar/mongodb/3.2.4/mongo.config && redis-server /usr/local/etc/redis.conf && node ./server/router.js"
   },
   "engines": {
     "install-node": "6.9.2"
   },
   "dependencies": {
     "antd": "^2.7.0",
+    "babel": "^6.23.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-runtime": "^6.9.2",
     "dva": "^1.2.1",

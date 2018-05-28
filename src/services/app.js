@@ -17,3 +17,11 @@ export async function logout() {
     method: 'get'
   })
 }
+
+// 更新当前用户的基本信息
+export async function updateCurrentUser({ password, email, phone }) {
+  return request('/api/auth/setPersonal', {
+    method: 'post',
+    body: JSON.stringify({ password, email, phone})
+  })
+}
